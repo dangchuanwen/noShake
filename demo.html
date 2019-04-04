@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        
+        //防抖
+        function noShake (fn, delay) {
+            var timer = null;
+            return function () {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    fn();
+                }, delay);
+            }
+        }
+        //防抖测试 使劲的点击触发
+        var clickFn = noShake(function () {
+            console.log("I am clicking!");
+        }, 300);
+        window.addEventListener('click', function () {
+            clickFn();
+        })
+
+        //节流
+        function throttle (fn, delay) {
+            var ing = false;
+            return function () {
+                if (!ing) {
+                    fn();
+                    ing = true;
+                    setTimeout(() => {
+                        ing = false;
+                    }, delay);
+                }
+                else {
+
+                }
+            }
+        }
+        //节流测试   使劲的点击触发
+        var hoverFn = throttle(function () {
+            console.log("I am hover the window");
+        }, 1000);
+        window.addEventListener('click', function () {
+            
+            hoverFn();
+        })
+
+        
+        
+    </script>
+</body>
+</html>
